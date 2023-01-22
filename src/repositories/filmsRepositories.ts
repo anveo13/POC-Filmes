@@ -8,4 +8,9 @@ async function insertedFilm (name: string, genre: string, platform:string){
 
 }
 
-export {insertedFilm}
+async function deletedMovie (filmId: string){
+    await connection.query(`DELETE FROM films WHERE id=$1;`, [filmId]);
+
+}
+
+export {insertedFilm, deletedMovie}

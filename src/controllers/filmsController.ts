@@ -1,6 +1,6 @@
 
 import {Request, Response} from "express";
-import { insertedFilm } from "../repositories/filmsRepositories.js"
+import { deletedMovie, insertedFilm } from "../repositories/filmsRepositories.js"
 import { filmSchema } from "../schemas/filmSchema.js"
 import { Films } from "../protocols.js";
 
@@ -23,6 +23,16 @@ try {
 }
 }
 
+const deleteFilme = async (req:Request, res: Response)=>{
+    const filmId = req.params.filmId;
 
+    try {
+    await deletedMovie(filmId);
+    res.status(200).send("deleted movie!");
+    } catch (error) {
+        console.log(error);
+        res.sendStatus(500);
+    }
+    }
 
-export {postFilm}
+export {postFilm, deleteFilme}

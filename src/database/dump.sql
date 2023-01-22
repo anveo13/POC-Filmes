@@ -1,5 +1,5 @@
 CREATE TABLE "filmUser" (
-    "id" integer NOT NULL,
+    "id" SERIAL PRIMARY KEY,
     "filmId" integer NOT NULL,
     "userId" integer NOT NULL,
     "nota" text,
@@ -14,6 +14,6 @@ CREATE TABLE "films" (
 );
 
 CREATE TABLE "users" (
-    "id" integer NOT NULL,
-    "name" character varying(300) NOT NULL
+    "id" SERIAL PRIMARY KEY,
+    "name" VARCHAR (300) NOT NULL
 );
