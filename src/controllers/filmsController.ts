@@ -1,6 +1,6 @@
 
 import {Request, Response} from "express";
-import { deletedMovie, insertedFilm } from "../repositories/filmsRepositories.js"
+import { deletedMovie, insertedFilm, listFilmsBygender, listFilmsByPlatform } from "../repositories/filmsRepositories.js"
 import { filmSchema } from "../schemas/filmSchema.js"
 import { Films } from "../protocols.js";
 
@@ -35,4 +35,32 @@ const deleteFilme = async (req:Request, res: Response)=>{
     }
     }
 
-export {postFilm, deleteFilme}
+    const searchByPlatform = async (req: Request, res: Response)=>{
+
+        const platform: string = req.params.platform;
+        
+        try {
+    
+            const result = await listFilmsByPlatform(platform)
+            res.send(result.rows[0]);
+        } catch (error) {
+            console.log(error);
+            res.sendStatus(500);
+        }
+        }
+    
+        const searchByGenre = async (req: Request, res: Response)=>{
+    
+            const genre: string = req.params.genre;
+            
+            try {
+                const result = await listFilmsBygender(genre)
+                res.send(result.rows[0]);
+            } catch (error) {
+                console.log(error);
+                res.sendStatus(500);
+            }
+            }
+
+export {postFilm, deleteFilme, searchByPlatform, searchByGenre}
+
