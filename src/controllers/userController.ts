@@ -23,13 +23,6 @@ const filmWatched = async (req: Request, res: Response)=>{
     
     const { filmId, userId, nota, status } = req.body as FilmsWatched;
 
-    const {error} = userSchema.validate(req.body);
-    if(error){
-        return res.status(400).send({
-            message: error.message
-        })
-    }
-
     try {
 
         const filmExist = await connection.query(`SELECT * FROM films WHERE id = $1;`, [filmId]);

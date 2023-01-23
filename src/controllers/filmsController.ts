@@ -1,18 +1,14 @@
 
 import {Request, Response} from "express";
 import { deletedMovie, insertedFilm, listFilmsBygender, listFilmsByPlatform } from "../repositories/filmsRepositories.js"
-import { filmSchema } from "../schemas/filmSchema.js"
 import { Films } from "../protocols.js";
+import connection from "../database/db.js";
 
 const postFilm = async (req: Request, res: Response) =>{
     const {name, genre, platform }= req.body as Films;
 
-    const {error} = filmSchema.validate(req.body);
-    if(error){
-        return res.status(400).send({
-            message: error.message
-        })
-    }
+    const findName = await connection.query(`SELECT name FROM films WHERE name=$1`, [name]);
+        if (findName.rowCount) return res.status(409).send("Filme já cadastrado")
 
 try {
     await insertedFilm(name, genre, platform)
