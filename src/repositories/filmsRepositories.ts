@@ -13,7 +13,7 @@ async function deletedMovie (filmId: string){
 
 }
 async function listFilmsByPlatform(platform: string){
-    const result = await connection.query(`SELECT films.platform, name FROM films WHERE platform = $1 group by platform;`, [platform])
+    const result = await connection.query(`SELECT films.platform, COUNT(id) FROM films WHERE platform = $1 group by platform;`, [platform])
 
     return result;
         
