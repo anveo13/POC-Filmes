@@ -1,41 +1,37 @@
-
 import { Request, Response } from "express";
 import { deletedMovie, insertedFilm, listFilmsBygender, listFilmsByPlatform } from "../repositories/filmsRepositories.js"
 import { Films } from "../protocols.js";
-import connection from "../database/db.js";
+import services from "../services/filmsService.js";
 
-const postFilm = async (req: Request, res: Response) => {
-    const { name, genre, platform } = req.body as Films;
-
-    const findName = await connection.query(`SELECT name FROM films WHERE name=$1`, [name]);
-    if (findName.rowCount) return res.status(409).send("film already registered")
-
-    try {
-        await insertedFilm(name, genre, platform)
+async function postFilm (req: Request, res: Response) {
+    const film = req.body as Films;
+    try{
+        await services.postFilm(film, res);
         res.status(200).send("inserted movie!");
-    } catch (error) {
-        console.log(error);
+        return;
+    }catch (err){
+        console.error(err);
         res.sendStatus(500);
-    }
+        return;
+    }   
 }
 
-const deleteFilme = async (req: Request, res: Response) => {
+async function deleteFilme (req: Request, res: Response){
     const filmId = req.params.filmId;
 
     try {
-        await deletedMovie(filmId);
+        await services.deleteFilme(filmId)
         res.status(200).send("deleted movie!");
     } catch (error) {
         console.log(error);
         res.sendStatus(500);
     }
 }
-
-const searchByPlatform = async (req: Request, res: Response) => {
+async function searchByPlatform (req: Request, res: Response){
     const platform: string = req.params.platform;
 
     try {
-        const result = await listFilmsByPlatform(platform)
+        const result = await services.searchByPlatform(platform)
         res.send(result.rows[0]);
     } catch (error) {
         console.log(error);

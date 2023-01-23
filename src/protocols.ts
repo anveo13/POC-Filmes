@@ -16,3 +16,7 @@ export type Films = {
     genre: string,
     platform: string
 }
+export type Error = {
+    name: string;
+    message: string;
+}
