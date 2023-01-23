@@ -4,7 +4,7 @@ CRUD de filmes, onde o usuário avalia os filmes e diz se já assistiu ou não;
 
 # Rotas
 
-- POST: '/postUser'
+- POST: '/user'
 
 Para criar um usuário basta mandar um body no formato:
 
