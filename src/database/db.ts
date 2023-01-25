@@ -1,4 +1,4 @@
-import pg from "pg";
+/* import pg from "pg";
 
 const { Pool } = pg;
 
@@ -10,4 +10,11 @@ const connection = new Pool({
     database: "films"
 });
 
-export default connection;
+export default connection; */
+
+import pkg from '@prisma/client'
+
+const { PrismaClient } = pkg;
+const prisma = new PrismaClient();
+
+export default prisma;
