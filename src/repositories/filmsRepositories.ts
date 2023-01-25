@@ -1,4 +1,5 @@
 import connection from "../database/db.js";
+import prisma from "../database/db.js";
 
 async function insertedFilm (name: string, genre: string, platform:string){
 
