@@ -1,5 +1,5 @@
 # POC-Games
-CRUD de filmes, onde o usuário avalia os filmes e diz se já assistiu ou não;
+CRUD de filmes, onde o usuário posta os filmes que já assitiu;
 
 
 # Rotas
@@ -27,5 +27,22 @@ Para postar um filme é necessário um body o formato:
 - DELETE: '/deleteFilm/:filmId'
 
 Para deletar um filme é necessário mandar via params o id do filme
+
+
+- GET '/film/:id'
+
+Para Mostra um filme especifico
+
+- GET '/film/'
+
+Para Mostra todos os filmes
+
+- GET '/user/'
+
+Para Mostra todos os usuarios
+
+
+
+
 
 
