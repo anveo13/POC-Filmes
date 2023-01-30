@@ -4,10 +4,9 @@ export type ListFilms = {
 }
 
 export type FilmsWatched = {
-    filmId: string, 
-    userId:string, 
-    status: boolean,
-    nota:( string | number), 
+    filmId: number, 
+    userId:number, 
+    nota: string, 
     
 }
 

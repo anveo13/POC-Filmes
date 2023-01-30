@@ -12,17 +12,20 @@ model filmUser {
   filmId Int
   userId Int
   nota   String?
-  status Boolean
+  films  films   @relation(fields: [filmId], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  users  users   @relation(fields: [userId], references: [id], onDelete: NoAction, onUpdate: NoAction)
 }
 
 model films {
-  id       Int    @id @default(autoincrement())
+  id       Int        @id @default(autoincrement())
   name     String
-  genre    String @db.VarChar(100)
-  platform String @db.VarChar(100)
+  genre    String     @db.VarChar(100)
+  platform String     @db.VarChar(100)
+  filmUser filmUser[]
 }
 
 model users {
-  id   Int    @id @default(autoincrement())
-  name String @db.VarChar(300)
+  id       Int        @id @default(autoincrement())
+  name     String     @db.VarChar(300)
+  filmUser filmUser[]
 }

@@ -1,12 +1,10 @@
 import { Router } from "express";
-import { filmWatched, postUser } from "../controllers/userController.js";
-import { usersValidate } from "../middlewares/userMiddlewares.js";
-
+import {  getUser, postUser } from "../controllers/userController.js";
 
 
 const userRouter = Router();
 
 userRouter.post("/user", postUser);
-userRouter.post("/watchedFilmUser", usersValidate,filmWatched); 
+userRouter.get("/user", getUser)
 
 export default userRouter;
